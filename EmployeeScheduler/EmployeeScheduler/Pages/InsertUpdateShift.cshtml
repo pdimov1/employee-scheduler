@@ -1,0 +1,44 @@
+﻿@page
+@model EmployeeScheduler.Pages.InsertUpdateShiftModel
+@{
+    var isUpdate = Model.Shift.Id > 0;
+}
+
+@if (isUpdate)
+{
+    <h2>Edit Shift</h2>
+}
+else
+{
+    <h2>Create Shift</h2>
+}
+
+<form method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Shift.StartDate" class="control-label"></label>
+        <input type="time" asp-for="Shift.StartDate" class="form-control" />
+        <span asp-validation-for="Shift.StartDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Shift.EndDate" class="control-label"></label>
+        <input type="time" asp-for="Shift.EndDate" class="form-control" />
+        <span asp-validation-for="Shift.EndDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Shift.RoleId" class="control-label"></label>
+        <select asp-for="Shift.RoleId" class="form-control form-select-sm form-select" asp-items="Model.Roles.Select(x=> new SelectListItem { Text = x.Name, Value = x.Id.ToString() })"></select>
+        <span asp-validation-for="Shift.RoleId" class="text-danger"></span>
+    </div>
+    <input type="hidden" asp-for="Shift.Id" />
+    <input type="hidden" asp-for="Shift.EmployeeId" />
+    <br />
+    <div class="form-group">
+        <input type="submit" value="@(isUpdate ? "Update" : "Save")" class="btn btn-primary" />
+
+        @if (isUpdate)
+        {
+            <button type="submit" asp-page-handler="delete" asp-route-id="@Model.Shift.Id" class="btn btn-danger">Delete Shift</button>
+        }
+    </div>
+</form>

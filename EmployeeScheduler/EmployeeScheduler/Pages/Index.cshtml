@@ -1,0 +1,36 @@
+﻿@page
+@model IndexModel
+@{
+    var daysOfWeek = new[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+    var employees = Model.Shifts.Select(s => s.Employee).GroupBy(e => e.Id).Select(g => g.First());
+}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Employee</th>
+            <th scope="col">Mon</th>
+            <th scope="col">Tue</th>
+            <th scope="col">Wed</th>
+            <th scope="col">Thu</th>
+            <th scope="col">Fri</th>
+            <th scope="col">Sat</th>
+            <th scope="col">Sun</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var employee in employees)
+        {
+            <tr>
+                <td>@employee.Name</td>
+                @foreach (var day in daysOfWeek)
+                {
+                    var dayShifts = Model.Shifts.Where(s => s.EmployeeId == employee.Id && s.StartDate.DayOfWeek.ToString() == day).ToList();
+                    <partial name="_ShiftItemPartial"
+                             model="dayShifts"
+                             view-data='@new ViewDataDictionary(ViewData) { { "eid", @employee.Id }, {"day", @day}}' />
+                }
+            </tr>
+        }
+    </tbody>
+</table>

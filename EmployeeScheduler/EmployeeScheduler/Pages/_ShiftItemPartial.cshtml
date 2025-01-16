@@ -1,0 +1,17 @@
+﻿@using EmployeeScheduler.Models
+@model List<Shift>
+
+<td>
+    <div class="dayColumn">
+        @if (Model != null && Model.Any())
+        {
+            foreach (var shift in Model)
+            {
+                <a href="@Url.Page("InsertUpdateShift", new{ id = shift.Id, day = ViewData["day"] })">[@shift.Role.Name @shift.StartDate.ToString("HH:mm") - @shift.EndDate.ToString("HH:mm")]</a>
+                <br />
+            }
+        }
+
+        <a href="@Url.Page("InsertUpdateShift", new {eid = ViewData["eid"], day = ViewData["day"]})">[+]</a>
+    </div>
+</td>
