@@ -6,7 +6,7 @@ This is a web application designed to manage employee shifts, including creating
 
 Before running the solution, make sure you have the following installed:
 
-- [.NET 6 SDK](https://dotnet.microsoft.com/download/dotnet)
+- [.NET 8](https://dotnet.microsoft.com/download/dotnet)
 - [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) (or use a local database)
 - A code editor such as [Visual Studio](https://visualstudio.microsoft.com/) or [Visual Studio Code](https://code.visualstudio.com/)
 
